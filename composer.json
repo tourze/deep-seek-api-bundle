@@ -35,13 +35,13 @@
     "symfony/validator": "^7.3",
     "symfony/yaml": "^7.3",
     "tourze/bundle-dependency": "1.*",
-    "tourze/doctrine-async-insert-bundle": "0.1.*",
-    "tourze/doctrine-timestamp-bundle": "0.0.*",
-    "tourze/easy-admin-menu-bundle": "0.1.*",
+    "tourze/doctrine-async-insert-bundle": "1.0.*",
+    "tourze/doctrine-timestamp-bundle": "1.0.*",
+    "tourze/easy-admin-menu-bundle": "1.0.*",
     "tourze/http-client-bundle": "0.1.*",
     "tourze/open-ai-contracts": "0.0.*",
     "tourze/symfony-dependency-service-loader": "1.*",
-    "tourze/symfony-routing-auto-loader-bundle": "0.0.*"
+    "tourze/symfony-routing-auto-loader-bundle": "1.0.*"
   },
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^4.0",
@@ -49,7 +49,7 @@
     "phpunit/phpunit": "^11.5",
     "tourze/phpunit-base": "1.*",
     "tourze/phpunit-doctrine-entity": "1.*",
-    "tourze/phpunit-symfony-kernel-test": "1.*",
+    "tourze/phpunit-symfony-kernel-test": "1.0.*",
     "tourze/phpunit-symfony-unit-test": "1.*",
     "tourze/phpunit-symfony-web-test": "1.*"
   },
