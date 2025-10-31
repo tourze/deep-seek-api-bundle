@@ -2,25 +2,25 @@
 
 [English](README.md) | [中文](README.zh-CN.md)
 
-A Symfony bundle for integrating with DeepSeek API, providing API key management, model listing, and balance checking capabilities.
+一个用于集成 DeepSeek API 的 Symfony 包，提供 API 密钥管理、模型列表和余额检查功能。
 
-## Features
+## 功能特性
 
-- Multiple API key management with automatic rotation
-- List available models for each API key
-- Check account balance in multiple currencies
-- Validate API keys
-- Command-line tools for API interaction
+- 多个 API 密钥管理和自动轮换
+- 列出每个 API 密钥的可用模型
+- 检查多种货币的账户余额
+- 验证 API 密钥
+- 用于 API 交互的命令行工具
 
-## Installation
+## 安装
 
 ```bash
 composer require tourze/deep-seek-api-bundle
 ```
 
-## Configuration
+## 配置
 
-Configure your API keys in your Symfony configuration:
+在 Symfony 配置中配置您的 API 密钥：
 
 ```yaml
 # config/packages/deep_seek_api.yaml
@@ -30,107 +30,107 @@ deep_seek_api:
         - 'your-api-key-2'
 ```
 
-## Commands
+## 命令行工具
 
-### Analyze Balance Trends
+### 分析余额趋势
 
-Analyze balance changes and usage patterns over time.
+分析余额变化和使用模式。
 
 ```bash
-# Analyze balance for the last 7 days
+# 分析最近 7 天的余额
 bin/console deep-seek:analyze-balance
 
-# Analyze balance for specific number of days
+# 分析指定天数的余额
 bin/console deep-seek:analyze-balance --days=30
 
-# Analyze with specific time interval (hourly, daily, weekly)
+# 使用特定时间间隔（每小时、每天、每周）
 bin/console deep-seek:analyze-balance --interval=daily
 
-# Display in specific currency
+# 显示特定货币
 bin/console deep-seek:analyze-balance --currency=CNY
 
-# Show alerts for significant changes
+# 显示重大变化警告
 bin/console deep-seek:analyze-balance --show-alerts
 ```
 
-### Manage API Keys
+### 管理 API 密钥
 
-Manage DeepSeek API keys including listing, adding, and deactivating.
+管理 DeepSeek API 密钥，包括列表、添加和停用。
 
 ```bash
-# List all API keys
+# 列出所有 API 密钥
 bin/console deep-seek:api-key list
 
-# Add a new API key
-bin/console deep-seek:api-key add sk-your-api-key --name="Production Key"
+# 添加新的 API 密钥
+bin/console deep-seek:api-key add sk-your-api-key --name="生产密钥"
 
-# Deactivate an API key
+# 停用 API 密钥
 bin/console deep-seek:api-key deactivate sk-your-api-key
 
-# Activate an API key
+# 激活 API 密钥
 bin/console deep-seek:api-key activate sk-your-api-key
 
-# Show API key details
+# 显示 API 密钥详情
 bin/console deep-seek:api-key show sk-your-api-key
 ```
 
-### Check Balance
+### 检查余额
 
-Check the current balance for all API keys or a specific key.
+检查所有或特定 API 密钥的当前余额。
 
 ```bash
-# Check balance for all keys
+# 检查所有密钥的余额
 bin/console deepseek:balance:check
 
-# Check balance with detailed output
+# 显示详细输出
 bin/console deepseek:balance:check --verbose
 ```
 
-### List Models
+### 列出模型
 
-List all available models from DeepSeek API.
+列出 DeepSeek API 的所有可用模型。
 
 ```bash
-# List models for all keys
+# 列出所有密钥的模型
 bin/console deepseek:models:list
 
-# List models in JSON format
+# 以 JSON 格式列出模型
 bin/console deepseek:models:list --json
 ```
 
-### Validate API Key
+### 验证 API 密钥
 
-Validate whether API keys are working correctly.
+验证 API 密钥是否正常工作。
 
 ```bash
-# Validate all API keys
+# 验证所有 API 密钥
 bin/console deepseek:api-key:validate --all-keys
 
-# Validate specific API key
+# 验证特定 API 密钥
 bin/console deepseek:api-key:validate --key=sk-your-api-key
 ```
 
-### Sync Data
+### 同步数据
 
-Synchronize models and balance data from DeepSeek API.
+从 DeepSeek API 同步模型和余额数据。
 
 ```bash
-# Sync all data (models and balances)
+# 同步所有数据（模型和余额）
 bin/console deep-seek:sync-data
 
-# Sync only models
+# 仅同步模型
 bin/console deep-seek:sync-data --models-only
 
-# Sync only balances
+# 仅同步余额
 bin/console deep-seek:sync-data --balances-only
 
-# Force sync even if recently synced
+# 强制同步（即使最近已同步）
 bin/console deep-seek:sync-data --force
 ```
 
-## Usage in Code
+## 代码使用
 
-### Using DeepSeekService
+### 使用 DeepSeekService
 
 ```php
 use Tourze\DeepSeekApiBundle\Service\DeepSeekService;
@@ -143,19 +143,19 @@ class MyService
 
     public function example(): void
     {
-        // List models
+        // 列出模型
         $models = $this->deepSeekService->listModels();
         
-        // Check balance
+        // 检查余额
         $balance = $this->deepSeekService->getBalance();
         
-        // Validate API key
+        // 验证 API 密钥
         $isValid = $this->deepSeekService->validateApiKey('your-api-key');
     }
 }
 ```
 
-### Managing API Keys
+### 管理 API 密钥
 
 ```php
 use Tourze\DeepSeekApiBundle\Service\ApiKeyManager;
@@ -168,16 +168,16 @@ class MyKeyManager
 
     public function example(): void
     {
-        // Add a new API key
+        // 添加新的 API 密钥
         $this->apiKeyManager->addApiKey('new-api-key');
         
-        // Rotate to next key
+        // 轮换到下一个密钥
         $this->apiKeyManager->rotateToNextKey();
         
-        // Get current key
+        // 获取当前密钥
         $currentKey = $this->apiKeyManager->getCurrentKey();
         
-        // Mark key as invalid
+        // 将密钥标记为无效
         $this->apiKeyManager->markKeyAsInvalid('bad-key');
     }
 }

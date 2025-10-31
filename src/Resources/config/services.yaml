@@ -1,0 +1,49 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # 批量注册服务
+    Tourze\DeepSeekApiBundle\Command\:
+        resource: '../../Command/'
+    
+    Tourze\DeepSeekApiBundle\Controller\:
+        resource: '../../Controller/'
+        tags: ['controller.service_arguments']
+    
+    Tourze\DeepSeekApiBundle\Repository\:
+        resource: '../../Repository/'
+    
+    Tourze\DeepSeekApiBundle\Service\:
+        resource: '../../Service/'
+
+    # 特殊配置（必须保留）
+    Tourze\DeepSeekApiBundle\Service\ApiKeyManager:
+        public: true
+    
+    # AdminMenu服务配置
+    Tourze\DeepSeekApiBundle\Service\AdminMenu:
+        public: true
+    
+    # OpenAI Client Factory
+    Tourze\DeepSeekApiBundle\Service\OpenAiClientFactory:
+        arguments:
+            $httpClient: '@http_client'
+        public: true
+
+    # Ensure DeepSeekService is publicly available for tests
+    Tourze\DeepSeekApiBundle\Service\DeepSeekService:
+        public: true
+    
+    # OpenAI Client Provider
+    Tourze\DeepSeekApiBundle\Service\DeepSeekOpenAiClientProvider:
+        tags:
+            - { name: 'openai.client.provider' }
+    
+    # OpenAI Provider
+    Tourze\DeepSeekApiBundle\Service\OpenAiProvider:
+        public: true
+    
+    # DeepSeek OpenAI Client
+    Tourze\DeepSeekApiBundle\Service\DeepSeekOpenAiClient:
+        public: true
