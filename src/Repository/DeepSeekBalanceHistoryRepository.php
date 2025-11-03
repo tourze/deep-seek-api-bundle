@@ -69,6 +69,7 @@ class DeepSeekBalanceHistoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
+
         /** @var DeepSeekBalanceHistory|null $result */
         return $result;
     }
@@ -129,6 +130,7 @@ class DeepSeekBalanceHistoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+
         /** @var DeepSeekBalanceHistory[] $result */
         return $result;
     }
@@ -302,6 +304,7 @@ class DeepSeekBalanceHistoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+
         /** @var DeepSeekBalanceHistory[] $result */
         return $result;
     }
@@ -432,6 +435,7 @@ class DeepSeekBalanceHistoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+
         /** @var DeepSeekBalanceHistory[] $result */
         return $result;
     }

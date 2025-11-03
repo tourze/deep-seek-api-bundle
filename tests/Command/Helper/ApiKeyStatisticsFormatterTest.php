@@ -75,25 +75,23 @@ class ApiKeyStatisticsFormatterTest extends AbstractIntegrationTestCase
 
     public function testDisplayBasicKeyInformation(): void
     {
-        $apiKey = $this->createMock(DeepSeekApiKey::class);
-        // @phpstan-ignore-next-line
-        $apiKey->method('getId')->willReturn(1);
-        // @phpstan-ignore-next-line
-        $apiKey->method('getName')->willReturn('Test Key');
-        // @phpstan-ignore-next-line
-        $apiKey->method('getPriority')->willReturn(5);
-        // @phpstan-ignore-next-line
-        $apiKey->method('isActive')->willReturn(true);
-        // @phpstan-ignore-next-line
-        $apiKey->method('isValid')->willReturn(true);
-        // @phpstan-ignore-next-line
-        $apiKey->method('getUsageCount')->willReturn(10);
-        // @phpstan-ignore-next-line
-        $apiKey->method('getCreateTime')->willReturn(new \DateTimeImmutable());
-        // @phpstan-ignore-next-line
-        $apiKey->method('getLastUseTime')->willReturn(null);
-        // @phpstan-ignore-next-line
-        $apiKey->method('getUpdateTime')->willReturn(new \DateTimeImmutable());
+        // 使用真实实例而非 Mock 来避免 final 方法配置问题
+        // DeepSeekApiKey 使用 TimestampableAware trait，提供了 final 的 getCreateTime() 方法
+        $apiKey = new DeepSeekApiKey();
+        $apiKey->setName('Test Key');
+        $apiKey->setApiKey('sk-test-xxxx'); // 满足 @Assert\NotBlank 约束
+        $apiKey->setPriority(5);
+        $apiKey->setIsActive(true);
+        $apiKey->setIsValid(true);
+
+        // 设置使用次数为 10（与原 Mock 行为一致）
+        for ($i = 0; $i < 10; ++$i) {
+            $apiKey->incrementUsageCount();
+        }
+        // 通过 trait 提供的 setter 设置时间戳
+        $apiKey->setCreateTime(new \DateTimeImmutable());
+        // lastUseTime 保持为 null 即可
+        $apiKey->setUpdateTime(new \DateTimeImmutable());
 
         // @phpstan-ignore-next-line
         $this->mockIo->expects($this->once())->method('section')->with('Basic Information');
