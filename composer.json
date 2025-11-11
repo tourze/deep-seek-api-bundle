@@ -36,7 +36,7 @@
     "symfony/yaml": "^7.3",
     "tourze/bundle-dependency": "1.*",
     "tourze/doctrine-async-insert-bundle": "1.0.*",
-    "tourze/doctrine-timestamp-bundle": "1.0.*",
+    "tourze/doctrine-timestamp-bundle": "1.1.*",
     "tourze/easy-admin-menu-bundle": "1.0.*",
     "tourze/http-client-bundle": "1.0.*",
     "tourze/open-ai-contracts": "1.0.*",
