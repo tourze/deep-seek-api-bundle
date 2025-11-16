@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tourze\DeepSeekApiBundle\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
