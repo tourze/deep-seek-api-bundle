@@ -6,6 +6,7 @@ namespace Tourze\DeepSeekApiBundle\Command\Helper;
 
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Tourze\DeepSeekApiBundle\Entity\DeepSeekApiKey;
+use Tourze\DeepSeekApiBundle\Entity\DeepSeekApiLog;
 use Tourze\DeepSeekApiBundle\Repository\DeepSeekApiKeyRepository;
 use Tourze\DeepSeekApiBundle\Repository\DeepSeekApiLogRepository;
 use Tourze\DeepSeekApiBundle\Repository\DeepSeekBalanceRepository;
@@ -206,16 +207,12 @@ class ApiKeyStatisticsFormatter
     }
 
     /**
-     * @param object $log
+     * @param DeepSeekApiLog $log
      * @return array{string, string, string, string, string}
      */
-    private function buildApiLogRow(object $log): array
+    private function buildApiLogRow(DeepSeekApiLog $log): array
     {
-        /** @var string $endpoint */
-        // @phpstan-ignore-next-line
         $endpoint = $log->getEndpoint();
-        /** @var string $status */
-        // @phpstan-ignore-next-line
         $status = $log->getStatus();
 
         return [
