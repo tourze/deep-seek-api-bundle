@@ -12,6 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Tourze\DeepSeekApiBundle\Command\Helper\BalanceDataFormatter;
 use Tourze\DeepSeekApiBundle\Entity\DeepSeekApiKey;
 use Tourze\DeepSeekApiBundle\Entity\DeepSeekBalance;
+use Tourze\DeepSeekApiBundle\Entity\DeepSeekBalanceHistory;
 use Tourze\DeepSeekApiBundle\Repository\DeepSeekApiKeyRepository;
 use Tourze\DeepSeekApiBundle\Repository\DeepSeekBalanceHistoryRepository;
 use Tourze\DeepSeekApiBundle\Repository\DeepSeekBalanceRepository;
@@ -272,7 +273,7 @@ class AnalyzeBalanceCommand extends Command
     }
 
     /**
-     * @param mixed[] $history
+     * @param DeepSeekBalanceHistory[] $history
      * @return array{float, float}
      */
     private function calculateConsumptionAndTopup(array $history): array
@@ -281,10 +282,6 @@ class AnalyzeBalanceCommand extends Command
         $topup = 0.0;
 
         foreach ($history as $record) {
-            if (!$this->isValidHistoryRecord($record) || !is_object($record)) {
-                continue;
-            }
-
             [$recordConsumption, $recordTopup] = $this->extractConsumptionAndTopupFromRecord($record);
             $consumption += $recordConsumption;
             $topup += $recordTopup;
@@ -293,21 +290,12 @@ class AnalyzeBalanceCommand extends Command
         return [$consumption, $topup];
     }
 
-    private function isValidHistoryRecord(mixed $record): bool
-    {
-        return is_object($record)
-            && method_exists($record, 'getChangeType')
-            && method_exists($record, 'getBalanceChangeAsFloat');
-    }
-
     /**
      * @return array{float, float}
      */
-    private function extractConsumptionAndTopupFromRecord(object $record): array
+    private function extractConsumptionAndTopupFromRecord(DeepSeekBalanceHistory $record): array
     {
-        // @phpstan-ignore-next-line
         $changeType = $record->getChangeType();
-        // @phpstan-ignore-next-line
         $balanceChange = $record->getBalanceChangeAsFloat();
 
         if (!is_string($changeType) || !is_numeric($balanceChange)) {
