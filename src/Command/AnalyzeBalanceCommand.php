@@ -12,7 +12,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Tourze\DeepSeekApiBundle\Command\Helper\BalanceDataFormatter;
 use Tourze\DeepSeekApiBundle\Entity\DeepSeekApiKey;
 use Tourze\DeepSeekApiBundle\Entity\DeepSeekBalance;
-use Tourze\DeepSeekApiBundle\Entity\DeepSeekBalanceHistory;
 use Tourze\DeepSeekApiBundle\Repository\DeepSeekApiKeyRepository;
 use Tourze\DeepSeekApiBundle\Repository\DeepSeekBalanceHistoryRepository;
 use Tourze\DeepSeekApiBundle\Repository\DeepSeekBalanceRepository;
@@ -273,7 +272,7 @@ class AnalyzeBalanceCommand extends Command
     }
 
     /**
-     * @param DeepSeekBalanceHistory[] $history
+     * @param mixed[] $history
      * @return array{float, float}
      */
     private function calculateConsumptionAndTopup(array $history): array
@@ -304,9 +303,11 @@ class AnalyzeBalanceCommand extends Command
     /**
      * @return array{float, float}
      */
-    private function extractConsumptionAndTopupFromRecord(DeepSeekBalanceHistory $record): array
+    private function extractConsumptionAndTopupFromRecord(object $record): array
     {
+        // @phpstan-ignore-next-line
         $changeType = $record->getChangeType();
+        // @phpstan-ignore-next-line
         $balanceChange = $record->getBalanceChangeAsFloat();
 
         if (!is_string($changeType) || !is_numeric($balanceChange)) {

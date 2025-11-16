@@ -15,13 +15,13 @@ use Tourze\DeepSeekApiBundle\Repository\DeepSeekModelRepository;
 /**
  * API密钥统计数据和详情格式化帮助类
  */
-class ApiKeyStatisticsFormatter
+readonly class ApiKeyStatisticsFormatter
 {
     public function __construct(
-        private readonly DeepSeekApiKeyRepository $apiKeyRepository,
-        private readonly DeepSeekModelRepository $modelRepository,
-        private readonly DeepSeekBalanceRepository $balanceRepository,
-        private readonly DeepSeekApiLogRepository $apiLogRepository,
+        private DeepSeekApiKeyRepository $apiKeyRepository,
+        private DeepSeekModelRepository $modelRepository,
+        private DeepSeekBalanceRepository $balanceRepository,
+        private DeepSeekApiLogRepository $apiLogRepository,
     ) {
     }
 
@@ -224,9 +224,8 @@ class ApiKeyStatisticsFormatter
         ];
     }
 
-    private function formatStatusCode(object $log): string
+    private function formatStatusCode(DeepSeekApiLog $log): string
     {
-        // @phpstan-ignore-next-line
         $statusCode = $log->getStatusCode();
 
         if (null === $statusCode || (!is_int($statusCode) && !is_string($statusCode))) {
@@ -236,9 +235,8 @@ class ApiKeyStatisticsFormatter
         return (string) $statusCode;
     }
 
-    private function formatResponseTime(object $log): string
+    private function formatResponseTime(DeepSeekApiLog $log): string
     {
-        // @phpstan-ignore-next-line
         $responseTime = $log->getResponseTime();
 
         if (null === $responseTime || !is_float($responseTime)) {
@@ -248,10 +246,8 @@ class ApiKeyStatisticsFormatter
         return sprintf('%.2fs', $responseTime);
     }
 
-    private function formatRequestTime(object $log): string
+    private function formatRequestTime(DeepSeekApiLog $log): string
     {
-        /** @var \DateTimeInterface|null $requestTime */
-        // @phpstan-ignore-next-line
         $requestTime = $log->getRequestTime();
 
         return null !== $requestTime
