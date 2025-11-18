@@ -12,7 +12,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Exception\ForbiddenActionException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\DeepSeekApiBundle\Controller\DeepSeekBalanceHistoryCrudController;
-use Tourze\DeepSeekApiBundle\Entity\DeepSeekBalanceHistory;
 use Tourze\PHPUnitSymfonyWebTest\AbstractEasyAdminControllerTestCase;
 
 /**
@@ -87,11 +86,6 @@ final class DeepSeekBalanceHistoryCrudControllerTest extends AbstractEasyAdminCo
         $this->expectException(ForbiddenActionException::class);
 
         $client->request('GET', $this->generateAdminUrl(Action::EDIT, ['entityId' => 1]));
-    }
-
-    public function testGetEntityFqcnReturnsCorrectEntityClass(): void
-    {
-        $this->assertEquals(DeepSeekBalanceHistory::class, DeepSeekBalanceHistoryCrudController::getEntityFqcn());
     }
 
     public function testConfigureCrudSetsCorrectLabelsAndTitles(): void

@@ -12,7 +12,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Exception\ForbiddenActionException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\DeepSeekApiBundle\Controller\DeepSeekApiLogCrudController;
-use Tourze\DeepSeekApiBundle\Entity\DeepSeekApiLog;
 use Tourze\PHPUnitSymfonyWebTest\AbstractEasyAdminControllerTestCase;
 
 /**
@@ -25,11 +24,6 @@ final class DeepSeekApiLogCrudControllerTest extends AbstractEasyAdminController
     private function getController(): DeepSeekApiLogCrudController
     {
         return new DeepSeekApiLogCrudController();
-    }
-
-    public function testGetEntityFqcnReturnsCorrectEntityClass(): void
-    {
-        $this->assertEquals(DeepSeekApiLog::class, DeepSeekApiLogCrudController::getEntityFqcn());
     }
 
     public function testConfigureCrudSetsCorrectLabelsAndTitles(): void

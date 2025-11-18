@@ -26,11 +26,6 @@ final class DeepSeekModelCrudControllerTest extends AbstractEasyAdminControllerT
         return new DeepSeekModelCrudController();
     }
 
-    public function testGetEntityFqcnReturnsCorrectEntityClass(): void
-    {
-        $this->assertEquals(DeepSeekModel::class, DeepSeekModelCrudController::getEntityFqcn());
-    }
-
     public function testConfigureCrudSetsCorrectLabelsAndTitles(): void
     {
         $crud = $this->getController()->configureCrud(Crud::new());

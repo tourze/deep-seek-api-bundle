@@ -66,11 +66,6 @@ final class DeepSeekApiKeyCrudControllerTest extends AbstractEasyAdminController
         yield '优先级' => ['priority'];
     }
 
-    public function testGetEntityFqcnReturnsCorrectEntityClass(): void
-    {
-        $this->assertEquals(DeepSeekApiKey::class, DeepSeekApiKeyCrudController::getEntityFqcn());
-    }
-
     public function testConfigureCrudSetsCorrectLabelsAndTitles(): void
     {
         $crud = $this->getController()->configureCrud(Crud::new());

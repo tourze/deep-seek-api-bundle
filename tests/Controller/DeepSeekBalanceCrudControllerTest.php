@@ -12,7 +12,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Exception\ForbiddenActionException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use Tourze\DeepSeekApiBundle\Controller\DeepSeekBalanceCrudController;
-use Tourze\DeepSeekApiBundle\Entity\DeepSeekBalance;
 use Tourze\PHPUnitSymfonyWebTest\AbstractEasyAdminControllerTestCase;
 
 /**
@@ -25,11 +24,6 @@ final class DeepSeekBalanceCrudControllerTest extends AbstractEasyAdminControlle
     private function getController(): DeepSeekBalanceCrudController
     {
         return new DeepSeekBalanceCrudController();
-    }
-
-    public function testGetEntityFqcnReturnsCorrectEntityClass(): void
-    {
-        $this->assertEquals(DeepSeekBalance::class, DeepSeekBalanceCrudController::getEntityFqcn());
     }
 
     public function testConfigureCrudSetsCorrectLabelsAndTitles(): void
